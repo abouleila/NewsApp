@@ -133,11 +133,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Append query parameter and its value.
 
-        uriBuilder.appendQueryParameter("api-key", GUARDIAN_KEY);
-        uriBuilder.appendQueryParameter("show-tags", "contributor");
-        uriBuilder.appendQueryParameter("page-size", "10");
-        uriBuilder.appendQueryParameter("section", "football");
-        uriBuilder.appendQueryParameter("order-by", "newest");
+        uriBuilder.appendQueryParameter( "api-key", GUARDIAN_KEY );
+        uriBuilder.appendQueryParameter( "show-tags", "contributor" );
+        uriBuilder.appendQueryParameter( "order-by", "newest" );
 
         // Return the completed uri
         return new NewsLoader( this, uriBuilder.toString() );

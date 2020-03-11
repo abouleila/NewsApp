@@ -51,18 +51,18 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         titleView.setText( currentArticle.getTitle() );
 
         // Find the TextView with view ID section
-        TextView sectionView = listItemView.findViewById( R.id.title_text_view );
+        TextView sectionView = listItemView.findViewById( R.id.section_text_view );
         // Display the section name of the current article in that TextView
         sectionView.setText( currentArticle.getSectionName() );
 
         // Find the TextView with view ID author
-        TextView authorView = listItemView.findViewById( R.id.title_text_view );
+        TextView authorView = listItemView.findViewById( R.id.author_text_view );
         // Display the author name of the current article in that TextView
         authorView.setText( currentArticle.getAuthorName() );
 
 
         // Find the TextView with view ID date
-        TextView publishView = listItemView.findViewById( R.id.title_text_view );
+        TextView publishView = listItemView.findViewById( R.id.date_text_view );
         // Display the publish date of the current article in that TextView
         publishView.setText( currentArticle.getPublishDate() );
 

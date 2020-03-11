@@ -15,7 +15,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -175,13 +178,13 @@ public final class QueryUtils {
                 JSONArray tagsArray = currentArticle.getJSONArray("tags");
 
                 // Get the first tag within the array of tags
-                JSONObject currentTag = articleArray.getJSONObject(i);
+                JSONObject currentTag = tagsArray.getJSONObject(0);
 
                 // Extract the value for the key called "webTitle" with represent the author name
                 String authorName = currentTag.getString("webTitle");
 
                 // Extract the value for the key called "webPublicationDate" with represent the date of publishing
-                String articleDate = currentArticle.getString("webPublicationDate");
+                String articleDate = formatDate(currentArticle.getString("webPublicationDate"));
 
                 // Extract the value for the key called "url"
                 String articleUrl = currentArticle.getString("webUrl");
@@ -205,4 +208,17 @@ public final class QueryUtils {
         return articles;
     }
 
+    private static String formatDate(String date) {
+        String jsonDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+        SimpleDateFormat jsonFormatter = new SimpleDateFormat(jsonDatePattern);
+        try {
+            Date parsedJsonDate = jsonFormatter.parse(date);
+            String finalDatePattern = "dd MMM yyyy";
+            SimpleDateFormat finalDateFormatter = new SimpleDateFormat(finalDatePattern);
+            return finalDateFormatter.format(parsedJsonDate);
+        } catch (ParseException e) {
+            Log.e("QueryUtils", "Error parsing JSON date: ", e);
+            return "";
+        }
+    }
 }
